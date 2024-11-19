@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Inject, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Inject, Query, ParseIntPipe } from '@nestjs/common';
 import { CreateProfileUserDto } from './dto/create-profile-user.dto';
 import { UpdateProfileUserDto } from './dto/update-profile-user.dto';
 import { ClientProxy } from '@nestjs/microservices';
@@ -24,7 +24,7 @@ export class ProfileUsersController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.client.send("findUserById",+id);
+    return this.client.send("findUserById",{id});
   }
 
   @Patch(':id')
