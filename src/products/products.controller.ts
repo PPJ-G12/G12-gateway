@@ -24,8 +24,13 @@ export class ProductsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.client.send("findOneProduct",+id);
+  async findOne(@Param('id') id: string) {
+    const idNumber = parseInt(id, 10); // Convertir el ID a número
+    if (isNaN(idNumber)) {
+      throw new RpcException(`Invalid ID format: ${id}`); // Manejar error si no es un número
+    }
+
+    return this.client.send("findOneProduct", idNumber).toPromise(); // Enviar como número
   }
 
   @Patch(':id')
@@ -34,9 +39,14 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.client.send("deleteProduct",+id);
+  async remove(@Param('id') id: string) {
+    const idNumber = parseInt(id, 10);
+    if (isNaN(idNumber)) {
+      throw new RpcException(`Invalid ID format: ${id}`);
+    }
+    return this.client.send("deleteProduct", idNumber).toPromise();
   }
+
 
  
   @Get('search')
