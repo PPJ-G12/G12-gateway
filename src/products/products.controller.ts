@@ -20,11 +20,11 @@ export class ProductsController {
     } catch (error) {
       throw new HttpException(
         {
-          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          status: HttpStatus.BAD_REQUEST,
           error: 'Failed to create product',
           details: error.message,
         },
-        HttpStatus.INTERNAL_SERVER_ERROR,
+        HttpStatus.BAD_REQUEST,
       );
     }
   }
@@ -80,10 +80,10 @@ export class ProductsController {
       if (isNaN(idNumber)) {
         throw new HttpException(
           {
-            status: HttpStatus.BAD_REQUEST,
+            status: HttpStatus.NOT_FOUND,
             error: `Invalid ID format: ${id}`,
           },
-          HttpStatus.BAD_REQUEST,
+          HttpStatus.NOT_FOUND,
         );
       }
       return await this.client.send("updateProduct", { id: idNumber, updateProductDto }).toPromise();
