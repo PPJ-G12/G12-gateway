@@ -4,6 +4,9 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { NATS_SERVICE } from 'src/config';
 import { ClientProxy } from '@nestjs/microservices';
 import { PaginationDto } from 'src/common';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard'; 
+
 
 @Controller('products')
 export class ProductsController {
@@ -14,6 +17,7 @@ export class ProductsController {
   }
  
   @Post()
+  @UseGuards(JwtAuthGuard)
   async create(@Body() createProductDto: CreateProductDto) {
     try {
       return await this.client.send("createProduct", createProductDto).toPromise();

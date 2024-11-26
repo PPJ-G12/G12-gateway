@@ -12,11 +12,11 @@ export class AuthController {
 
   @Post('register')
   register(@Body() registerUserDto: RegisterUserDto) {
-    /* try { */
+    try {
       return this.client.send('registerUser', registerUserDto);
-   /*  } catch (error) {
+    } catch (error) {
       this.handleError(error);
-    } */
+    }
   }
 
   @Post('login')
