@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  client-gateway:
+    build: ./
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3000
+      - NATS_SERVERS=nats://nats-server:4222
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    external: true
