@@ -7,16 +7,16 @@ import { NATS_SERVICE } from 'src/config';
 @Controller('auth')
 export class AuthController {
   constructor(
-    @Inject(NATS_SERVICE) private readonly client: ClientProxy, // Cliente para comunicarse con la API Auth
+    @Inject(NATS_SERVICE) private readonly client: ClientProxy, 
   ) {}
 
   @Post('register')
   register(@Body() registerUserDto: RegisterUserDto) {
-    /* try { */
+    try {
       return this.client.send('registerUser', registerUserDto);
-   /*  } catch (error) {
+    } catch (error) {
       this.handleError(error);
-    } */
+    }
   }
 
   @Post('login')
