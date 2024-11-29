@@ -3,7 +3,7 @@ import { NATS_SERVICE } from "src/config";
 import { ClientProxy, RpcException } from "@nestjs/microservices";
 import { PaginationDto } from "src/common";
 import { catchError } from "rxjs";
-import { CreateProductDto, FindProductByNameDto, UpdateProductDto } from "./dto";
+import { CreateProductDto, UpdateProductDto } from "./dto";
 
 @Controller('products')
 export class ProductsController {
