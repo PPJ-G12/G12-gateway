@@ -4,6 +4,7 @@ import { ClientProxy, RpcException } from "@nestjs/microservices";
 import { PaginationDto } from "src/common";
 import { catchError } from "rxjs";
 import { CreateProductDto, UpdateProductDto } from "./dto";
+import { Public } from "../auth/decorators/public.decorator";
 
 @Controller('products')
 export class ProductsController {
@@ -22,11 +23,13 @@ export class ProductsController {
     );
   }
 
+  @Public()
   @Get()
   findAll(@Query() paginationDto: PaginationDto) {
     return this.client.send("findAllProducts", paginationDto);
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.client.send("findOneProduct", { id }).pipe(
