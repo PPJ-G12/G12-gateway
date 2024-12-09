@@ -19,7 +19,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(new RpcCustomExceptionFilter());
   app.enableCors({
-    origin: "http://localhost:5173", // Cambia esto al dominio de tu frontend en producción
+    origin: "http://localhost:4200", // Cambia esto al dominio de tu frontend en producción
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     credentials: true, // Habilita cookies y autenticación en las solicitudes si es necesario
   });
